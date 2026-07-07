@@ -12,7 +12,7 @@ namespace WebAPI.DataAccess.Context
             // Eğer başka bir yerden ayar gelmediyse, şu adresteki PostgreSQL'e bağlan
             if (!optionsBuilder.IsConfigured)
             {
-                // DİKKAT: Buradaki 'Password=sifre' kısmını bilgisayarına PostgreSQL kurarken verdiğin kendi şifrenle değiştir!
+                // DİKKAT: Buradaki 'Password=sifre' kısmını bilgisayarına PostgreSQL kurarken verdiğin kendi şifrenle değiştir! / bu kod sıkıntılı hiç değişmeden çalışması gerekiyor
                 optionsBuilder.UseNpgsql("Host=localhost;Database=StajMesajDb;Username=postgres;Password=571632");
             }
         }

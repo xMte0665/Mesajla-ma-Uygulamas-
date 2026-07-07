@@ -40,11 +40,14 @@ namespace ConsoleClient
                 // Sadece gerçekten dolu bir mesaj yazılırsa ekranı temizle ve gönder!
                 if (!string.IsNullOrWhiteSpace(input))
                 {
-                    // Yazdığın ham metni sil 
-                    Console.SetCursorPosition(0, Console.CursorTop - 1);
-                    Console.Write(new string(' ', Console.WindowWidth));
-                    Console.SetCursorPosition(0, Console.CursorTop - 1);
-
+                    // Sadece o an bulunulan satırı bul ve temizle
+                    int currentLine = Console.CursorTop - 1;
+                    if (currentLine >= 0)
+                    {
+                        Console.SetCursorPosition(0, currentLine);
+                        Console.Write(new string(' ', Console.WindowWidth));
+                        Console.SetCursorPosition(0, currentLine);
+                    }
                     await _apiService.SendMessageAsync(_roomId, _username, input);
                 }
             }
