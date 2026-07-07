@@ -6,26 +6,32 @@ Bu proje, C# .NET kullanılarak geliştirilmiş, Client-Server mimarisine dayana
 
 Proje iki ana bileşenden oluşmaktadır:
 
-1. **Web API (Backend):** - **Mimari:** Katmanlı Mimari (Entities, DataAccess, Business, WebAPI) ve DTO (Data Transfer Object) pattern.
-   - **Veritabanı:** PostgreSQL (Entity Framework Core kullanılarak Code-First yaklaşımıyla modellendi).
-   - **Özellikler:** Dependency Injection (DI) kullanılarak servisler soyutlandı, Swagger ile API dökümantasyonu sağlandı.
-2. **Console Client (Frontend/İstemci):** - **Özellikler:** API ile asenkron (HTTP) haberleşme. Odaya özel mesajların gerçek zamanlıya yakın akmasını sağlayan **Polling (Sürekli Yenileme)** mekanizması entegre edilmiştir.
+1. **Web API (Backend):** - **Mimari:** Katmanlı Mimari (Entities, DataAccess, Business, WebAPI) ve DTO pattern.
+   - **Veritabanı:** PostgreSQL (Entity Framework Core ile Code-First).
+   - **Özellikler:** Dependency Injection (DI) ve Swagger API dökümantasyonu.
+   - **Güvenlik:** `DotNetEnv` kullanılarak veritabanı şifreleri koddan izole edildi ve `.env` dosyasıyla koruma altına alındı.
+
+2. **Console Client (Frontend/İstemci):** - **Özellikler:** API ile asenkron (HTTP) haberleşme ve gerçek zamanlı mesaj akışı için **Polling (Sürekli Yenileme)** mekanizması.
+
+---
 
 ## ⚙️ Nasıl Çalıştırılır?
 
-### 1. Veritabanı Ayarları
+### 1. Veritabanı ve Güvenlik Ayarları
 
-WebAPI projesi içindeki `AppDbContext.cs` dosyasında bulunan PostgreSQL bağlantı cümlenizi kendi yerel veritabanı bilgilerinize göre güncelleyin. Ardından terminalde `WebAPI` dizinine girip tabloları oluşturun:
-`dotnet ef database update`
+Projede veritabanı şifreleri kod içerisine yazılmamıştır. Projeyi çalıştırmadan önce:
+
+- `WebAPI` klasörü içindeki `.env.example` dosyasının adını **`.env`** olarak değiştirin.
+- İçerisindeki `Password=BURAYA_KENDI_SIFRENI_YAZ` kısmına kendi yerel PostgreSQL şifrenizi yazıp kaydedin.
+- Terminalde `WebAPI` dizinine girip veritabanı tablolarını oluşturun:
+  `dotnet ef database update`
 
 ### 2. API'yi Ayağa Kaldırma
 
-Terminalden `WebAPI` dizinine girin ve motoru ateşleyin:
+Terminalden `WebAPI` dizinine girin ve sunucuyu başlatın:
 `dotnet run`
-API ayağa kalktığında `http://localhost:5211/swagger` adresinden servisleri test edebilirsiniz.
 
 ### 3. İstemciyi (Client) Başlatma
 
 Yeni bir terminal açın, `ConsoleClient` dizinine girin ve uygulamayı başlatın:
 `dotnet run`
-Kullanıcı adınızı girerek mevcut odalara katılabilir veya yeni oda kurarak eşzamanlı mesajlaşmayı test edebilirsiniz.
