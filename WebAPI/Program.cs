@@ -7,6 +7,7 @@ using WebAPI.DataAccess.Abstract;
 using WebAPI.DataAccess.Concrete;
 using WebAPI.DataAccess.Context;
 
+DotNetEnv.Env.Load();
 var builder = WebApplication.CreateBuilder(args);  // web sunucusunu inşaya başla hazır metot
 
 // API Controller'larını sisteme ekle build et hazır metot buda
