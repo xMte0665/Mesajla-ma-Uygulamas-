@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using WebAPI.Business.Abstract;
-using WebAPI.Dtos.MessageDtos;
+using SharedModels;
 using WebAPI.Entities.Concrete;
 
 namespace WebAPI.Controllers
